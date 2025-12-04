@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - claude/minimal-version-01PQqcDPaCdpYuffpQe3YGij
+      - claude/**
       - main
   workflow_dispatch:
 
