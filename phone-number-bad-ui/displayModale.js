@@ -199,6 +199,7 @@ function getTileAtCatPosition() {
 
 function beginGame() {
     const cat = document.getElementById("cat");
+    const board = document.getElementById("game-container");
 
     let catX = 100;    // position actuelle
     let catY = 100;
@@ -208,7 +209,7 @@ function beginGame() {
 
 
     document.addEventListener("mousemove", (e) => {
-        const board = document.getElementById("game-container");
+        
         const rect = board.getBoundingClientRect();
 
         // Coordonnées du curseur dans le repère du plateau
@@ -235,12 +236,24 @@ function beginGame() {
             catY += vy;
         }
 
+         // RÉCUPÉRATION DES LIMITES
+         const boardRect = board.getBoundingClientRect();
+         const catRect = cat.getBoundingClientRect();
+ 
+         // Dimensions relatives
+         const maxX = board.offsetWidth - cat.offsetWidth;
+         const maxY = board.offsetHeight - cat.offsetHeight;
+ 
+         // Empêche de sortir du plateau
+         catX = Math.max(0, Math.min(catX, maxX));
+         catY = Math.max(0, Math.min(catY, maxY));
+
         // Applique la position
         cat.style.transform = `translate(${catX}px, ${catY}px)`;
 
 
 
-        // 🔥 Boucle gameplay : détecte la tuile actuelle
+        //  Boucle gameplay : détecte la tuile actuelle
         const currentTile = getTileAtCatPosition();
 
         if (currentTile !== null && currentTile !== lastTileId) {
@@ -254,7 +267,25 @@ function beginGame() {
 
     function addTileToPhoneNumber(value) {
         const field = document.getElementById("phone-number-field");
-        field.textContent += value; // concatène simplement
+
+        if (value === "X") {
+            field.textContent = "";
+
+        }
+        else if (value === "V") {
+            const phoneField = document.getElementById("phone-number-input-field");
+            phoneField.value = field.textContent; 
+            closeModal(); 
+        }
+        else{
+            if (field.textContent.length < 10) {
+                field.textContent += value;
+            }
+        }
+        
+        
+        
+
     }
 
 
