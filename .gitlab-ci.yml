@@ -1,36 +1,89 @@
 # Configuration GitLab CI/CD pour déployer sur GitLab Pages
+# Documentation: https://docs.gitlab.com/ee/user/project/pages/
+
+# Image de base légère
 image: alpine:latest
 
-# Variables
+# Variables d'environnement
 variables:
   GIT_STRATEGY: clone
+  GIT_DEPTH: 0
 
-# Stages de la pipeline
+# Étapes de la pipeline
 stages:
+  - test
   - deploy
 
-# Job de déploiement GitLab Pages
-pages:
-  stage: deploy
+# Job de validation (optionnel mais recommandé)
+validate:
+  stage: test
   script:
-    - echo "Déploiement sur GitLab Pages..."
-    # Créer le répertoire public
-    - mkdir -p public
-    # Copier tous les fichiers HTML, CSS, JS vers public/
-    - cp index.html public/
-    - cp style.css public/
-    - cp script.js public/
-    # Copier le README et la license si besoin
-    - cp README.md public/ || true
-    - cp LICENSE public/ || true
-    - echo "Déploiement terminé !"
-  artifacts:
-    paths:
-      - public
-    expire_in: 30 days
-  # Déployer seulement sur certaines branches
+    - echo "Validation des fichiers..."
+    - test -f index.html || (echo "❌ index.html manquant" && exit 1)
+    - test -f style.css || (echo "❌ style.css manquant" && exit 1)
+    - test -f script.js || (echo "❌ script.js manquant" && exit 1)
+    - echo "✅ Tous les fichiers requis sont présents"
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
     - if: '$CI_COMMIT_BRANCH =~ /^claude\/.*/'
     - if: '$CI_PIPELINE_SOURCE == "web"'
-  # Pour Pages, le job doit s'appeler "pages" et produire un dossier "public"
+
+# Job de déploiement GitLab Pages
+# Important: Le job DOIT s'appeler "pages" pour GitLab Pages
+pages:
+  stage: deploy
+  before_script:
+    - echo "🚀 Démarrage du déploiement GitLab Pages..."
+    - echo "Branche: $CI_COMMIT_BRANCH"
+    - echo "Commit: $CI_COMMIT_SHORT_SHA"
+  script:
+    # Créer le répertoire public (obligatoire pour GitLab Pages)
+    - mkdir -p public
+
+    # Vérifier que les fichiers existent avant de les copier
+    - |
+      if [ ! -f "index.html" ]; then
+        echo "❌ ERREUR: index.html n'existe pas!"
+        exit 1
+      fi
+
+    # Copier tous les fichiers nécessaires vers public/
+    - cp -v index.html public/
+    - cp -v style.css public/
+    - cp -v script.js public/
+
+    # Copier les fichiers optionnels s'ils existent
+    - cp -v README.md public/ 2>/dev/null || echo "⚠️  README.md non trouvé (optionnel)"
+    - cp -v LICENSE public/ 2>/dev/null || echo "⚠️  LICENSE non trouvé (optionnel)"
+
+    # Afficher le contenu du dossier public
+    - echo "📁 Contenu du dossier public:"
+    - ls -lah public/
+
+    # Vérifier la taille des fichiers
+    - du -sh public/*
+
+    - echo "✅ Déploiement terminé avec succès!"
+
+  # Artifacts: GitLab Pages a besoin du dossier "public"
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+
+  # Règles de déclenchement
+  rules:
+    # Déployer sur la branche main
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: always
+    # Déployer sur toutes les branches claude/*
+    - if: '$CI_COMMIT_BRANCH =~ /^claude\/.*/'
+      when: always
+    # Permettre le déclenchement manuel
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+
+  # Environnement pour GitLab Pages
+  environment:
+    name: production
+    url: https://$CI_PROJECT_ROOT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME
