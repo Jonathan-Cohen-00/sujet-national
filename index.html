@@ -12,6 +12,20 @@
     <header>
         <h1>🏛️ Le Village Numérique Résistant</h1>
         <p class="subtitle">David contre Goliath, Astérix contre l'Empire numérique</p>
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-icon">🏆</span>
+                <span id="user-score">0</span> points
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">🎖️</span>
+                <span id="badges-count">0</span> badges
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">🌱</span>
+                <span id="co2-saved">0</span> kg CO₂ économisé
+            </div>
+        </div>
     </header>
 
     <main>
@@ -23,8 +37,73 @@
 
                 <div class="choice-box">
                     <p><strong>Vous êtes prêt·e à rejoindre la résistance ?</strong></p>
-                    <button onclick="goToSection('manifeste')" class="btn-primary">Découvrir le manifeste NIRD</button>
-                    <button onclick="goToSection('quiz')" class="btn-secondary">Tester mes connaissances</button>
+                    <button onclick="goToSection('simulation')" class="btn-primary">🦠 Voir la simulation de menaces</button>
+                    <button onclick="goToSection('manifeste')" class="btn-secondary">📜 Découvrir le manifeste NIRD</button>
+                    <button onclick="goToSection('quiz')" class="btn-secondary">⚔️ Tester mes connaissances</button>
+                    <button onclick="goToSection('lab')" class="btn-secondary">🔬 Accéder au laboratoire</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Simulation de Vers -->
+        <section id="simulation" class="section">
+            <div class="content">
+                <h2>🦠 Simulation de Propagation de Menaces</h2>
+                <p>Observez en temps réel comment un ver informatique peut infecter un réseau non protégé, et comment un réseau NIRD y résiste !</p>
+
+                <div class="simulation-controls">
+                    <button onclick="startSimulation('vulnerable')" class="btn-danger">▶️ Réseau Vulnérable</button>
+                    <button onclick="startSimulation('nird')" class="btn-safe">▶️ Réseau NIRD Protégé</button>
+                    <button onclick="startSimulation('compare')" class="btn-primary">⚔️ Comparaison Directe</button>
+                    <button onclick="resetSimulation()" class="btn-back">🔄 Réinitialiser</button>
+                </div>
+
+                <div class="simulation-container">
+                    <div class="canvas-wrapper" id="vulnerable-network">
+                        <h3>Réseau Traditionnel (Vulnérable)</h3>
+                        <canvas id="canvas-vulnerable" width="600" height="400"></canvas>
+                        <div class="network-stats">
+                            <div class="stat">Machines saines: <span id="healthy-vulnerable">100</span></div>
+                            <div class="stat infected">Machines infectées: <span id="infected-vulnerable">0</span></div>
+                            <div class="stat">Vitesse de propagation: <span id="speed-vulnerable">0</span>/s</div>
+                        </div>
+                    </div>
+
+                    <div class="canvas-wrapper" id="nird-network" style="display:none;">
+                        <h3>Réseau NIRD (Protégé)</h3>
+                        <canvas id="canvas-nird" width="600" height="400"></canvas>
+                        <div class="network-stats">
+                            <div class="stat">Machines saines: <span id="healthy-nird">100</span></div>
+                            <div class="stat infected">Machines infectées: <span id="infected-nird">0</span></div>
+                            <div class="stat">Systèmes isolés: <span id="isolated-nird">0</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="simulation-info">
+                    <div class="info-card">
+                        <h4>❌ Réseau Vulnérable</h4>
+                        <ul>
+                            <li>Systèmes d'exploitation propriétaires obsolètes</li>
+                            <li>Pas de mises à jour de sécurité</li>
+                            <li>Dépendance aux éditeurs commerciaux</li>
+                            <li>Propagation rapide des menaces</li>
+                        </ul>
+                    </div>
+                    <div class="info-card nird">
+                        <h4>✅ Réseau NIRD</h4>
+                        <ul>
+                            <li>Linux et logiciels libres à jour</li>
+                            <li>Communauté active de sécurité</li>
+                            <li>Isolation intelligente des menaces</li>
+                            <li>Résilience et autonomie</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="navigation">
+                    <button onclick="goToSection('intro')" class="btn-back">← Retour</button>
+                    <button onclick="goToSection('manifeste')" class="btn-primary">Continuer le voyage →</button>
                 </div>
             </div>
         </section>
@@ -122,6 +201,150 @@
             </div>
         </section>
 
+        <!-- Section Laboratoire -->
+        <section id="lab" class="section">
+            <div class="content">
+                <h2>🔬 Laboratoire Interactif</h2>
+                <p>Explorez l'impact concret de la démarche NIRD avec des données réelles et des comparaisons visuelles.</p>
+
+                <div class="lab-tabs">
+                    <button class="tab-btn active" onclick="switchLabTab('impact')">🌍 Impact Environnemental</button>
+                    <button class="tab-btn" onclick="switchLabTab('economy')">💰 Économies Réalisées</button>
+                    <button class="tab-btn" onclick="switchLabTab('security')">🔒 Sécurité Comparée</button>
+                    <button class="tab-btn" onclick="switchLabTab('autonomy')">⚡ Autonomie</button>
+                </div>
+
+                <div class="lab-content" id="lab-impact">
+                    <h3>Impact Environnemental</h3>
+                    <div class="chart-container">
+                        <canvas id="chart-co2" width="600" height="300"></canvas>
+                    </div>
+                    <div class="impact-stats">
+                        <div class="impact-card">
+                            <div class="impact-value">75%</div>
+                            <div class="impact-label">Réduction de déchets électroniques</div>
+                        </div>
+                        <div class="impact-card">
+                            <div class="impact-value">420 kg</div>
+                            <div class="impact-label">CO₂ économisé par machine/an</div>
+                        </div>
+                        <div class="impact-card">
+                            <div class="impact-value">+5 ans</div>
+                            <div class="impact-label">Durée de vie prolongée</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-content" id="lab-economy" style="display:none;">
+                    <h3>Économies Réalisées</h3>
+                    <div class="chart-container">
+                        <canvas id="chart-economy" width="600" height="300"></canvas>
+                    </div>
+                    <div class="economy-comparison">
+                        <div class="comparison-card traditional">
+                            <h4>❌ Approche Traditionnelle</h4>
+                            <div class="cost-item">Licences Windows: <strong>150€/poste</strong></div>
+                            <div class="cost-item">Suite Office: <strong>100€/poste</strong></div>
+                            <div class="cost-item">Antivirus: <strong>40€/poste</strong></div>
+                            <div class="cost-item">Renouvellement matériel: <strong>600€/3ans</strong></div>
+                            <div class="total-cost">Total: <strong>890€</strong> + 200€/an/poste</div>
+                        </div>
+                        <div class="comparison-card nird">
+                            <h4>✅ Approche NIRD</h4>
+                            <div class="cost-item">Linux (Ubuntu/Debian): <strong>0€</strong></div>
+                            <div class="cost-item">LibreOffice: <strong>0€</strong></div>
+                            <div class="cost-item">Sécurité intégrée: <strong>0€</strong></div>
+                            <div class="cost-item">Reconditionnement: <strong>150€</strong></div>
+                            <div class="total-cost saved">Total: <strong>150€</strong> (économie de 83%)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-content" id="lab-security" style="display:none;">
+                    <h3>Comparaison de Sécurité</h3>
+                    <div class="security-metrics">
+                        <div class="metric-row">
+                            <div class="metric-label">Vulnérabilités critiques (2024)</div>
+                            <div class="metric-bar">
+                                <div class="bar traditional" style="width: 85%;">
+                                    <span>Windows: 847</span>
+                                </div>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="bar nird" style="width: 30%;">
+                                    <span>Linux: 248</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">Temps moyen de correction</div>
+                            <div class="metric-bar">
+                                <div class="bar traditional" style="width: 70%;">
+                                    <span>Propriétaire: 28 jours</span>
+                                </div>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="bar nird" style="width: 25%;">
+                                    <span>Libre: 9 jours</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-label">Transparence du code</div>
+                            <div class="metric-bar">
+                                <div class="bar traditional" style="width: 15%;">
+                                    <span>Propriétaire: Fermé</span>
+                                </div>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="bar nird" style="width: 100%;">
+                                    <span>Libre: 100% Open Source</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-content" id="lab-autonomy" style="display:none;">
+                    <h3>Niveau d'Autonomie</h3>
+                    <div class="autonomy-gauge">
+                        <canvas id="gauge-autonomy" width="400" height="250"></canvas>
+                    </div>
+                    <div class="autonomy-factors">
+                        <div class="factor">
+                            <div class="factor-name">🔧 Capacité de réparation</div>
+                            <div class="progress-bar">
+                                <div class="progress nird" style="width: 95%;">95%</div>
+                            </div>
+                        </div>
+                        <div class="factor">
+                            <div class="factor-name">🎓 Compétences internes</div>
+                            <div class="progress-bar">
+                                <div class="progress nird" style="width: 85%;">85%</div>
+                            </div>
+                        </div>
+                        <div class="factor">
+                            <div class="factor-name">📚 Documentation disponible</div>
+                            <div class="progress-bar">
+                                <div class="progress nird" style="width: 100%;">100%</div>
+                            </div>
+                        </div>
+                        <div class="factor">
+                            <div class="factor-name">🤝 Communauté de support</div>
+                            <div class="progress-bar">
+                                <div class="progress nird" style="width: 90%;">90%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation">
+                    <button onclick="goToSection('intro')" class="btn-back">← Retour</button>
+                    <button onclick="goToSection('actions')" class="btn-primary">Passer à l'action →</button>
+                </div>
+            </div>
+        </section>
+
         <!-- Section Actions -->
         <section id="actions" class="section">
             <div class="content">
@@ -168,9 +391,24 @@
         </section>
     </main>
 
+    <!-- Modal Badges -->
+    <div id="badge-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBadgeModal()">&times;</span>
+            <h2>🏆 Vos Badges et Achievements</h2>
+            <div id="badges-container" class="badges-grid">
+                <!-- Les badges seront générés dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
     <footer>
         <p>🎨 Créé pour La Nuit de l'Info 2025 | Sous licence libre CC-BY-SA 4.0</p>
         <p>Projet NIRD - Numérique Inclusif, Responsable et Durable</p>
+        <button onclick="showBadges()" class="footer-btn">🎖️ Voir mes badges</button>
     </footer>
 
     <script src="script.js"></script>
