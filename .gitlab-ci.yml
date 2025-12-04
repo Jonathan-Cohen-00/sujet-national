@@ -1,0 +1,36 @@
+# Configuration GitLab CI/CD pour déployer sur GitLab Pages
+image: alpine:latest
+
+# Variables
+variables:
+  GIT_STRATEGY: clone
+
+# Stages de la pipeline
+stages:
+  - deploy
+
+# Job de déploiement GitLab Pages
+pages:
+  stage: deploy
+  script:
+    - echo "Déploiement sur GitLab Pages..."
+    # Créer le répertoire public
+    - mkdir -p public
+    # Copier tous les fichiers HTML, CSS, JS vers public/
+    - cp index.html public/
+    - cp style.css public/
+    - cp script.js public/
+    # Copier le README et la license si besoin
+    - cp README.md public/ || true
+    - cp LICENSE public/ || true
+    - echo "Déploiement terminé !"
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  # Déployer seulement sur certaines branches
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_COMMIT_BRANCH =~ /^claude\/.*/'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+  # Pour Pages, le job doit s'appeler "pages" et produire un dossier "public"
