@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+}
+
+.fullpage-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: lightblue;
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80vh;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.at-right {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 15px;
+}
+
+.game-container {
+
+}
+
+.phone-number-field {
+    width: 100%;
+    display: flex;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+#game-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    border: 2px solid black;
+}
+
+.tile-container {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tile {
+    background-color: grey;
+    height: 80%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* l’objet qui se déplace */
+#cat {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: red;
+    border-radius: 50%;
+    transition: transform 0.1s linear;
+
+    left: 0;
+    top: 0;
+
+
+}
+
