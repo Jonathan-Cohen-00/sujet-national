@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruthBot</title>
+    <link rel="stylesheet" href="popup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>TruthBot</h1>
+            <p class="subtitle">Gardien de la Vérité Numérique</p>
+        </header>
+
+        <main>
+            <div id="initial-state">
+                <p class="instruction">Analysez cette page pour vérifier sa fiabilité.</p>
+                <button id="analyze-btn" class="primary-btn">
+                    <span class="btn-text">Analyser la page</span>
+                    <div class="loader" style="display: none;"></div>
+                </button>
+            </div>
+
+            <div id="result-state" class="hidden">
+                <div class="score-card">
+                    <div class="score-circle">
+                        <span id="score-value">--</span>
+                        <span class="score-label">Fiabilité</span>
+                    </div>
+                    <h2 id="verdict-text">Analyse en cours...</h2>
+                </div>
+
+                <div class="details">
+                    <h3>Analyse de l'IA</h3>
+                    <p id="explanation-text">Veuillez patienter pendant que TruthBot examine le contenu...</p>
+                </div>
+
+                <button id="reset-btn" class="secondary-btn">Nouvelle Analyse</button>
+            </div>
+        </main>
+
+        <footer>
+            <a href="#" id="settings-link">Paramètres</a>
+        </footer>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>
