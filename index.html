@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIRD - Le Village Numérique Résistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars"></div>
+
+    <header>
+        <h1>🏛️ Le Village Numérique Résistant</h1>
+        <p class="subtitle">David contre Goliath, Astérix contre l'Empire numérique</p>
+    </header>
+
+    <main>
+        <!-- Section Introduction -->
+        <section id="intro" class="section active">
+            <div class="content">
+                <h2>Bienvenue dans le Village NIRD !</h2>
+                <p>Face aux géants du numérique, les établissements scolaires peuvent devenir des villages résistants, ingénieux, autonomes et créatifs.</p>
+
+                <div class="choice-box">
+                    <p><strong>Vous êtes prêt·e à rejoindre la résistance ?</strong></p>
+                    <button onclick="goToSection('manifeste')" class="btn-primary">Découvrir le manifeste NIRD</button>
+                    <button onclick="goToSection('quiz')" class="btn-secondary">Tester mes connaissances</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Manifeste -->
+        <section id="manifeste" class="section">
+            <div class="content">
+                <h2>🛡️ Le Manifeste NIRD</h2>
+                <p><strong>NIRD</strong> = Numérique Inclusif, Responsable et Durable</p>
+
+                <div class="pillars">
+                    <div class="pillar" onclick="togglePillar(this)">
+                        <h3>♿ Inclusif</h3>
+                        <div class="pillar-content">
+                            <p>Un numérique accessible à tous, sans discrimination.</p>
+                            <ul>
+                                <li>Sensibiliser à la sobriété numérique</li>
+                                <li>Réduire la fracture numérique</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pillar" onclick="togglePillar(this)">
+                        <h3>🌱 Responsable</h3>
+                        <div class="pillar-content">
+                            <p>Des choix éthiques et transparents.</p>
+                            <ul>
+                                <li>Promouvoir les logiciels libres</li>
+                                <li>Favoriser le réemploi et le reconditionnement</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pillar" onclick="togglePillar(this)">
+                        <h3>♻️ Durable</h3>
+                        <div class="pillar-content">
+                            <p>Un numérique qui respecte l'environnement.</p>
+                            <ul>
+                                <li>Lutter contre l'obsolescence programmée</li>
+                                <li>Utiliser Linux et les outils libres</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation">
+                    <button onclick="goToSection('intro')" class="btn-back">← Retour</button>
+                    <button onclick="goToSection('quiz')" class="btn-primary">Continuer le voyage →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Quiz -->
+        <section id="quiz" class="section">
+            <div class="content">
+                <h2>⚔️ Quiz de la Résistance</h2>
+                <p>Testez vos connaissances sur les enjeux du numérique responsable !</p>
+
+                <div id="quiz-container">
+                    <div class="question" id="q1">
+                        <h3>Question 1 : Quel est le principal problème de l'obsolescence programmée ?</h3>
+                        <button onclick="checkAnswer(1, 'wrong')" class="quiz-btn">Elle améliore les performances</button>
+                        <button onclick="checkAnswer(1, 'correct')" class="quiz-btn">Elle force à racheter du matériel neuf</button>
+                        <button onclick="checkAnswer(1, 'wrong')" class="quiz-btn">Elle permet de réparer facilement</button>
+                        <div class="answer-feedback"></div>
+                    </div>
+
+                    <div class="question hidden" id="q2">
+                        <h3>Question 2 : Qu'est-ce qu'un logiciel libre ?</h3>
+                        <button onclick="checkAnswer(2, 'wrong')" class="quiz-btn">Un logiciel gratuit uniquement</button>
+                        <button onclick="checkAnswer(2, 'correct')" class="quiz-btn">Un logiciel dont le code est accessible et modifiable</button>
+                        <button onclick="checkAnswer(2, 'wrong')" class="quiz-btn">Un logiciel sans licence</button>
+                        <div class="answer-feedback"></div>
+                    </div>
+
+                    <div class="question hidden" id="q3">
+                        <h3>Question 3 : Pourquoi Linux est-il promu par NIRD ?</h3>
+                        <button onclick="checkAnswer(3, 'wrong')" class="quiz-btn">Il est plus difficile à utiliser</button>
+                        <button onclick="checkAnswer(3, 'wrong')" class="quiz-btn">Il coûte plus cher</button>
+                        <button onclick="checkAnswer(3, 'correct')" class="quiz-btn">Il est libre et peut faire revivre de vieux ordinateurs</button>
+                        <div class="answer-feedback"></div>
+                    </div>
+
+                    <div class="quiz-result hidden" id="result">
+                        <h3>🎉 Félicitations !</h3>
+                        <p>Vous avez complété le quiz ! Score : <span id="score">0</span>/3</p>
+                        <p class="result-message"></p>
+                    </div>
+                </div>
+
+                <div class="navigation">
+                    <button onclick="goToSection('manifeste')" class="btn-back">← Retour</button>
+                    <button onclick="goToSection('actions')" class="btn-primary hidden" id="quiz-next">Découvrir les actions →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Actions -->
+        <section id="actions" class="section">
+            <div class="content">
+                <h2>🚀 Passer à l'Action</h2>
+                <p>Voici comment votre établissement peut rejoindre la résistance numérique :</p>
+
+                <div class="actions-grid">
+                    <div class="action-card">
+                        <div class="action-icon">💻</div>
+                        <h3>Utiliser des logiciels libres</h3>
+                        <p>LibreOffice, Firefox, VLC... Des alternatives libres et performantes existent !</p>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">🔧</div>
+                        <h3>Réparer et reconditionner</h3>
+                        <p>Donnez une seconde vie au matériel obsolète avec Linux et les outils de réemploi.</p>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">🤝</div>
+                        <h3>Mutualiser les ressources</h3>
+                        <p>Rejoignez la Forge des communs numériques éducatifs pour partager les outils.</p>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">🌍</div>
+                        <h3>Co-construire localement</h3>
+                        <p>Développez des solutions numériques ouvertes et autonomes dans votre territoire.</p>
+                    </div>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Rejoignez le mouvement NIRD !</h3>
+                    <p>Visitez le site officiel : <a href="https://nird.forge.apps.education.fr/" target="_blank" rel="noopener">nird.forge.apps.education.fr</a></p>
+                    <p class="info-text">La Forge des communs numériques éducatifs</p>
+                </div>
+
+                <div class="navigation">
+                    <button onclick="goToSection('quiz')" class="btn-back">← Retour</button>
+                    <button onclick="goToSection('intro')" class="btn-primary">Recommencer le voyage 🔄</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>🎨 Créé pour La Nuit de l'Info 2025 | Sous licence libre CC-BY-SA 4.0</p>
+        <p>Projet NIRD - Numérique Inclusif, Responsable et Durable</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
