@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIRD - Le Village Numérique Résistant (avec TruthBot)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars"></div>
+
+    <header>
+        <h1>🏛️ Le Village Numérique Résistant</h1>
+        <p class="subtitle">David contre Goliath, Astérix contre l'Empire numérique</p>
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-icon">🏆</span>
+                <span id="user-score">0</span> points
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">🎖️</span>
+                <span id="badges-count">0</span> badges
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">🌱</span>
+                <span id="co2-saved">0</span> kg CO₂ économisé
+            </div>
+            <div class="stat-item" style="background: linear-gradient(135deg, #2d5f3f 0%, #6b9f7f 100%); padding: 8px 16px; border-radius: 20px;">
+                <span class="stat-icon">🤖</span>
+                TruthBot Actif
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section Introduction -->
+        <section id="intro" class="section active">
+            <div class="content">
+                <h2>Bienvenue dans le Village NIRD !</h2>
+                <p>Face aux géants du numérique, les établissements scolaires peuvent devenir des villages résistants, ingénieux, autonomes et créatifs.</p>
+
+                <div class="choice-box">
+                    <p><strong>Vous êtes prêt·e à rejoindre la résistance ?</strong></p>
+                    <button onclick="goToSection('simulation')" class="btn-primary">🦠 Voir la simulation de menaces</button>
+                    <button onclick="goToSection('manifeste')" class="btn-secondary">📜 Découvrir le manifeste NIRD</button>
+                    <button onclick="goToSection('quiz')" class="btn-secondary">⚔️ Tester mes connaissances</button>
+                    <button onclick="goToSection('lab')" class="btn-secondary">🔬 Accéder au laboratoire</button>
+                    <button onclick="goToSection('truthbot-demo')" class="btn-secondary" style="background: linear-gradient(135deg, #2d5f3f 0%, #6b9f7f 100%);">🤖 Découvrir TruthBot</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nouvelle Section TruthBot -->
+        <section id="truthbot-demo" class="section">
+            <div class="content">
+                <h2>🤖 TruthBot - Combattez la Désinformation</h2>
+                <p>TruthBot est un outil intelligent qui vous aide à détecter les fausses informations en ligne. Développé dans le cadre du défi <strong>AI4GOOD</strong>.</p>
+
+                <div class="info-card nird">
+                    <h3>Comment fonctionne TruthBot ?</h3>
+                    <ul>
+                        <li><strong>Détection au survol :</strong> Passez simplement votre souris sur un texte pour l'analyser</li>
+                        <li><strong>Analyse multi-sources :</strong> Combine plusieurs APIs de fact-checking pour une évaluation fiable</li>
+                        <li><strong>Score de fiabilité :</strong> Obtient un score de 0 à 100 basé sur plusieurs critères</li>
+                        <li><strong>Éducation à l'esprit critique :</strong> Apprend à reconnaître les signes de désinformation</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Testez TruthBot avec ces exemples :</h3>
+
+                <div class="info-card" style="margin-top: 1rem; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
+                    <h4>✅ Exemple 1 : Contenu Fiable</h4>
+                    <p>
+                        Selon une étude de l'ADEME (Agence de l'Environnement et de la Maîtrise de l'Énergie) publiée en 2023,
+                        le reconditionnement d'un ordinateur permet d'économiser en moyenne 156 kg de CO₂ par rapport à l'achat
+                        d'un appareil neuf. Cette donnée est confirmée par plusieurs sources scientifiques et gouvernementales,
+                        dont le rapport annuel de l'ADEME disponible sur ademe.fr et les études de l'European Environment Agency.
+                    </p>
+                </div>
+
+                <div class="info-card" style="margin-top: 1rem; cursor: pointer; transition: all 0.3s ease; border-left-color: #e74c3c;" onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
+                    <h4>⚠️ Exemple 2 : Contenu Suspect</h4>
+                    <p>
+                        INCROYABLE !!! URGENT !!! Les géants de la Tech NE VEULENT PAS que vous sachiez ceci !!!
+                        Une RÉVÉLATION CHOQUANTE qui va changer votre vie ! Windows collecte TOUTES vos données SECRÈTEMENT !!!
+                        PARTAGEZ AVANT CENSURE !!! Ce SECRET caché depuis des années enfin révélé ! ILS VOUS ESPIONNENT !!!
+                        Vous n'allez pas croire ce qui se passe vraiment dans votre ordinateur !!!
+                    </p>
+                </div>
+
+                <div class="info-card nird" style="margin-top: 1rem; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
+                    <h4>ℹ️ Exemple 3 : Contenu Neutre</h4>
+                    <p>
+                        Le projet NIRD (Numérique Inclusif, Responsable et Durable) est une initiative visant à promouvoir
+                        l'utilisation de logiciels libres dans les établissements scolaires français. L'objectif principal
+                        est de réduire la dépendance aux solutions propriétaires tout en favorisant l'autonomie numérique
+                        et le développement durable. Le projet encourage également le reconditionnement de matériel informatique
+                        avec des distributions Linux adaptées comme Ubuntu ou Debian.
+                    </p>
+                </div>
+
+                <div class="info-card" style="margin-top: 1rem; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
+                    <h4>✅ Exemple 4 : Article avec Sources</h4>
+                    <p>
+                        D'après l'Agence France-Presse (AFP) et plusieurs études universitaires publiées dans Nature Communications,
+                        les deepfakes représentent une menace croissante pour l'intégrité de l'information. Une étude menée par
+                        l'université de Stanford en 2024 montre que 60% des internautes ont déjà été exposés à des contenus
+                        manipulés sans en avoir conscience. Les chercheurs recommandent l'utilisation d'outils de vérification
+                        automatisés pour aider les citoyens à développer leur esprit critique face aux contenus en ligne.
+                        Sources : AFP, Stanford University, Nature Communications (DOI: 10.1038/s41467-2024-12345).
+                    </p>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: #fff3cd; border-left: 4px solid #f39c12; border-radius: 8px;">
+                    <h4 style="margin-top: 0; color: #856404;">💡 Comment utiliser TruthBot ?</h4>
+                    <p style="color: #856404; margin-bottom: 0.5rem;">
+                        1. <strong>Survolez</strong> les exemples ci-dessus avec votre souris<br>
+                        2. <strong>Attendez</strong> quelques instants pour voir l'analyse apparaître<br>
+                        3. <strong>Cliquez</strong> sur "Voir les détails" pour une analyse complète<br>
+                        4. <strong>Utilisez</strong> le bouton TruthBot en bas à droite pour analyser vos propres textes
+                    </p>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: #d4edda; border-left: 4px solid #27ae60; border-radius: 8px;">
+                    <h4 style="margin-top: 0; color: #155724;">🌱 Dimension Éthique - AI4GOOD</h4>
+                    <p style="color: #155724; margin-bottom: 0;">
+                        TruthBot s'inscrit dans la mission d'<strong>AI4GOOD</strong> : utiliser l'intelligence artificielle
+                        de manière responsable pour lutter contre la désinformation. L'outil encourage l'esprit critique
+                        plutôt que la censure, respecte la vie privée (aucune collecte de données), et reste accessible
+                        à tous gratuitement. L'objectif est d'éduquer les citoyens à reconnaître les contenus douteux
+                        et à vérifier les sources avant de partager une information.
+                    </p>
+                </div>
+
+                <div class="navigation">
+                    <button onclick="goToSection('intro')" class="btn-back">← Retour</button>
+                    <button onclick="window.open('truthbot/demo.html', '_blank')" class="btn-primary">
+                        📖 Documentation Complète
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Les autres sections restent inchangées... -->
+        <!-- (Copier toutes les sections de index.html original) -->
+
+        <!-- Section Simulation de Vers -->
+        <section id="simulation" class="section">
+            <div class="content">
+                <h2>🦠 Simulation de Propagation de Menaces</h2>
+                <p>Observez en temps réel comment un ver informatique peut infecter un réseau non protégé, et comment un réseau NIRD y résiste !</p>
+
+                <div class="simulation-controls">
+                    <button onclick="startSimulation('vulnerable')" class="btn-danger">▶️ Réseau Vulnérable</button>
+                    <button onclick="startSimulation('nird')" class="btn-safe">▶️ Réseau NIRD Protégé</button>
+                    <button onclick="startSimulation('compare')" class="btn-primary">⚔️ Comparaison Directe</button>
+                    <button onclick="resetSimulation()" class="btn-back">🔄 Réinitialiser</button>
+                </div>
+
+                <div class="simulation-container">
+                    <div class="canvas-wrapper" id="vulnerable-network">
+                        <h3>Réseau Traditionnel (Vulnérable)</h3>
+                        <canvas id="canvas-vulnerable" width="600" height="400"></canvas>
+                        <div class="network-stats">
+                            <div class="stat">Machines saines: <span id="healthy-vulnerable">100</span></div>
+                            <div class="stat infected">Machines infectées: <span id="infected-vulnerable">0</span></div>
+                            <div class="stat">Vitesse de propagation: <span id="speed-vulnerable">0</span>/s</div>
+                        </div>
+                    </div>
+
+                    <div class="canvas-wrapper" id="nird-network" style="display:none;">
+                        <h3>Réseau NIRD (Protégé)</h3>
+                        <canvas id="canvas-nird" width="600" height="400"></canvas>
+                        <div class="network-stats">
+                            <div class="stat">Machines saines: <span id="healthy-nird">100</span></div>
+                            <div class="stat infected">Machines infectées: <span id="infected-nird">0</span></div>
+                            <div class="stat">Systèmes isolés: <span id="isolated-nird">0</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation">
+                    <button onclick="goToSection('intro')" class="btn-back">← Retour</button>
+                    <button onclick="goToSection('manifeste')" class="btn-primary">Continuer le voyage →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Les autres sections du projet original... -->
+        <!-- (Copier toutes les sections restantes) -->
+
+    </main>
+
+    <!-- Modal Badges -->
+    <div id="badge-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBadgeModal()">&times;</span>
+            <h2>🏆 Vos Badges et Achievements</h2>
+            <div id="badges-container" class="badges-grid">
+                <!-- Les badges seront générés dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <footer>
+        <p>🎨 Créé pour La Nuit de l'Info 2025 | Sous licence libre CC-BY-SA 4.0</p>
+        <p>Projet NIRD - Numérique Inclusif, Responsable et Durable</p>
+        <p>🤖 Défi AI4GOOD - TruthBot intégré | Intelligence Artificielle au service du bien commun</p>
+        <button onclick="showBadges()" class="footer-btn">🎖️ Voir mes badges</button>
+    </footer>
+
+    <!-- Scripts originaux -->
+    <script src="script.js"></script>
+
+    <!-- Intégration de TruthBot -->
+    <script src="truthbot/truthbot.js"></script>
+
+    <!-- Configuration optionnelle de TruthBot -->
+    <script>
+        // Configuration de TruthBot pour correspondre au thème NIRD
+        if (window.TruthBot) {
+            console.log('✅ TruthBot chargé et prêt à combattre la désinformation !');
+
+            // Ajouter un badge pour TruthBot
+            if (typeof unlockBadge === 'function') {
+                // Ajouter un badge personnalisé
+                badges.push({
+                    id: 'truthbot_user',
+                    icon: '🤖',
+                    name: 'Fact-Checker',
+                    desc: 'Utilisé TruthBot pour vérifier une information'
+                });
+            }
+        }
+
+        // Vous pouvez configurer l'API Google Fact Check ici si vous avez une clé
+        /*
+        window.TruthBot.configure({
+            apis: {
+                googleFactCheck: {
+                    enabled: true,
+                    apiKey: 'VOTRE_CLE_API'
+                }
+            }
+        });
+        */
+    </script>
+</body>
+</html>
