@@ -1,0 +1,57 @@
+/* === GLOBAL === */
+body {
+    margin: 0;
+    padding: 0;
+    background: #2d5f3f;
+    font-family: "Segoe UI", Arial, sans-serif;
+    text-align: center;
+    color: #faf3e0;
+    overflow-x: hidden;
+}
+
+/* === TITLE === */
+h1 {
+    font-size: 3rem;
+    margin-top: 40px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* === PENGUIN IMAGE ANIMATION === */
+#penguin {
+    width: 400px;
+    margin-top: 40px;
+    transition: transform 3s ease-in-out;
+    filter: drop-shadow(0 0 20px rgba(0,0,0,0.4));
+}
+
+/* === SLOGANS === */
+.slogan {
+    font-size: 2rem;
+    margin: 20px 0;
+    transition: opacity 1.2s ease-in-out;
+    font-weight: 600;
+    text-shadow: 0 0 6px rgba(0,0,0,0.3);
+}
+
+/* === BUTTON === */
+#reasonBtn {
+    background: #f4d35e;
+    color: #2d5f3f;
+    padding: 15px 30px;
+    margin-top: 30px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+#reasonBtn:hover {
+    background: #ffcc33;
+    transform: scale(1.07);
+}
