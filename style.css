@@ -8,6 +8,7 @@
 :root {
     --primary-color: #2d5f3f;
     --secondary-color: #6b9f7f;
+    --linux-link-color: #F4D35E;
     --accent-color: #f4a261;
     --dark-bg: #1a1a2e;
     --light-bg: #f5f5f5;
@@ -109,6 +110,12 @@ header h1 {
     font-size: 1.1rem;
     font-style: italic;
     color: var(--secondary-color);
+}
+
+.subtitle a {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--linux-link-color);
 }
 
 .stats-bar {
