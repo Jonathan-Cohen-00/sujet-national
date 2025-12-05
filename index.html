@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NIRD - Le Village Numérique Résistant</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="stars"></div>
 
@@ -34,12 +36,15 @@
         <section id="intro" class="section active">
             <div class="content">
                 <h2>Bienvenue dans le Village NIRD !</h2>
-                <p>Face aux géants du numérique, les établissements scolaires peuvent devenir des villages résistants, ingénieux, autonomes et créatifs.</p>
+                <p>Face aux géants du numérique, les établissements scolaires peuvent devenir des villages résistants,
+                    ingénieux, autonomes et créatifs.</p>
 
                 <div class="choice-box">
                     <p><strong>Vous êtes prêt·e à rejoindre la résistance ?</strong></p>
-                    <button onclick="goToSection('simulation')" class="btn-primary">🦠 Voir la simulation de menaces</button>
-                    <button onclick="goToSection('manifeste')" class="btn-secondary">📜 Découvrir le manifeste NIRD</button>
+                    <button onclick="goToSection('simulation')" class="btn-primary">🦠 Voir la simulation de
+                        menaces</button>
+                    <button onclick="goToSection('manifeste')" class="btn-secondary">📜 Découvrir le manifeste
+                        NIRD</button>
                     <button onclick="goToSection('quiz')" class="btn-secondary">⚔️ Tester mes connaissances</button>
                     <button onclick="goToSection('lab')" class="btn-secondary">🔬 Accéder au laboratoire</button>
                 </div>
@@ -50,7 +55,8 @@
         <section id="simulation" class="section">
             <div class="content">
                 <h2>🦠 Simulation de Propagation de Menaces</h2>
-                <p>Observez en temps réel comment un ver informatique peut infecter un réseau non protégé, et comment un réseau NIRD y résiste !</p>
+                <p>Observez en temps réel comment un ver informatique peut infecter un réseau non protégé, et comment un
+                    réseau NIRD y résiste !</p>
 
                 <div class="simulation-controls">
                     <button onclick="startSimulation('vulnerable')" class="btn-danger">▶️ Réseau Vulnérable</button>
@@ -166,25 +172,32 @@
                 <div id="quiz-container">
                     <div class="question" id="q1">
                         <h3>Question 1 : Quel est le principal problème de l'obsolescence programmée ?</h3>
-                        <button onclick="checkAnswer(1, 'wrong')" class="quiz-btn">Elle améliore les performances</button>
-                        <button onclick="checkAnswer(1, 'correct')" class="quiz-btn">Elle force à racheter du matériel neuf</button>
-                        <button onclick="checkAnswer(1, 'wrong')" class="quiz-btn">Elle permet de réparer facilement</button>
+                        <button onclick="checkAnswer(1, 'wrong')" class="quiz-btn">Elle améliore les
+                            performances</button>
+                        <button onclick="checkAnswer(1, 'correct')" class="quiz-btn">Elle force à racheter du matériel
+                            neuf</button>
+                        <button onclick="checkAnswer(1, 'wrong')" class="quiz-btn">Elle permet de réparer
+                            facilement</button>
                         <div class="answer-feedback"></div>
                     </div>
 
                     <div class="question hidden" id="q2">
                         <h3>Question 2 : Qu'est-ce qu'un logiciel libre ?</h3>
-                        <button onclick="checkAnswer(2, 'wrong')" class="quiz-btn">Un logiciel gratuit uniquement</button>
-                        <button onclick="checkAnswer(2, 'correct')" class="quiz-btn">Un logiciel dont le code est accessible et modifiable</button>
+                        <button onclick="checkAnswer(2, 'wrong')" class="quiz-btn">Un logiciel gratuit
+                            uniquement</button>
+                        <button onclick="checkAnswer(2, 'correct')" class="quiz-btn">Un logiciel dont le code est
+                            accessible et modifiable</button>
                         <button onclick="checkAnswer(2, 'wrong')" class="quiz-btn">Un logiciel sans licence</button>
                         <div class="answer-feedback"></div>
                     </div>
 
                     <div class="question hidden" id="q3">
                         <h3>Question 3 : Pourquoi Linux est-il promu par NIRD ?</h3>
-                        <button onclick="checkAnswer(3, 'wrong')" class="quiz-btn">Il est plus difficile à utiliser</button>
+                        <button onclick="checkAnswer(3, 'wrong')" class="quiz-btn">Il est plus difficile à
+                            utiliser</button>
                         <button onclick="checkAnswer(3, 'wrong')" class="quiz-btn">Il coûte plus cher</button>
-                        <button onclick="checkAnswer(3, 'correct')" class="quiz-btn">Il est libre et peut faire revivre de vieux ordinateurs</button>
+                        <button onclick="checkAnswer(3, 'correct')" class="quiz-btn">Il est libre et peut faire revivre
+                            de vieux ordinateurs</button>
                         <div class="answer-feedback"></div>
                     </div>
 
@@ -197,7 +210,8 @@
 
                 <div class="navigation">
                     <button onclick="goToSection('manifeste')" class="btn-back">← Retour</button>
-                    <button onclick="goToSection('actions')" class="btn-primary hidden" id="quiz-next">Découvrir les actions →</button>
+                    <button onclick="goToSection('actions')" class="btn-primary hidden" id="quiz-next">Découvrir les
+                        actions →</button>
                 </div>
             </div>
         </section>
@@ -206,7 +220,8 @@
         <section id="lab" class="section">
             <div class="content">
                 <h2>🔬 Laboratoire Interactif</h2>
-                <p>Explorez l'impact concret de la démarche NIRD avec des données réelles et des comparaisons visuelles.</p>
+                <p>Explorez l'impact concret de la démarche NIRD avec des données réelles et des comparaisons visuelles.
+                </p>
 
                 <div class="lab-tabs">
                     <button class="tab-btn active" onclick="switchLabTab('impact')">🌍 Impact Environnemental</button>
@@ -278,6 +293,7 @@
                             </div>
                         </div>
                         <div class="metric-row">
+
                             <div class="metric-label">Temps moyen de correction</div>
                             <div class="metric-bar">
                                 <div class="bar traditional" style="width: 70%;">
@@ -380,7 +396,8 @@
 
                 <div class="cta-box">
                     <h3>Rejoignez le mouvement NIRD !</h3>
-                    <p>Visitez le site officiel : <a href="https://nird.forge.apps.education.fr/" target="_blank" rel="noopener">nird.forge.apps.education.fr</a></p>
+                    <p>Visitez le site officiel : <a href="https://nird.forge.apps.education.fr/" target="_blank"
+                            rel="noopener">nird.forge.apps.education.fr</a></p>
                     <p class="info-text">La Forge des communs numériques éducatifs</p>
                 </div>
 
@@ -410,9 +427,12 @@
         <p>🎨 Créé pour La Nuit de l'Info 2025 | Sous licence libre CC-BY-SA 4.0</p>
         <p>Projet NIRD - Numérique Inclusif, Responsable et Durable</p>
         <button onclick="showBadges()" class="footer-btn">🎖️ Voir mes badges</button>
-        <button onclick="location.href='phone-number-bad-ui/form.html'" class="footer-btn">S'abonner à la newsletter ✉️</button>
+        <button onclick="location.href='phone-number-bad-ui/form.html'" class="footer-btn">S'abonner à la newsletter
+            ✉️</button>
+        <button onclick="location.href='TruthBot/demo.html'" class="footer-btn">🤖 Démo TruthBot</button>
     </footer>
     <script>
+
         window.TruthBotConfig = {
             apis: {
                 googleFactCheck: {
@@ -437,4 +457,5 @@
         });
     </script>
 </body>
+
 </html>

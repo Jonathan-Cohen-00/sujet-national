@@ -6,7 +6,7 @@
  * Analyse du texte et des images au survol avec multiple APIs de fact-checking.
  */
 
-(function() {
+(function () {
     'use strict';
 
     // ========================================
@@ -488,7 +488,7 @@ RAISON: Clickbait utilisant langage émotionnel et théorie du complot sans aucu
                         lowerResponse.includes('vérifié')) {
                         score = 75;
                     } else if (lowerResponse.includes('faux') || lowerResponse.includes('suspect') ||
-                               lowerResponse.includes('désinformation')) {
+                        lowerResponse.includes('désinformation')) {
                         score = 25;
                     }
 
@@ -520,7 +520,7 @@ RAISON: Clickbait utilisant langage émotionnel et théorie du complot sans aucu
 
                 // Détection spéciale : IMPOSSIBLE_A_VERIFIER mais avec score très bas = contenu suspect
                 const suspiciousKeywords = ['clickbait', 'complot', 'sensationnaliste', 'manipulation',
-                                           'désinformation', 'suspect', 'théorie', 'fake'];
+                    'désinformation', 'suspect', 'théorie', 'fake'];
                 const isSuspiciousContent = suspiciousKeywords.some(keyword =>
                     raison.toLowerCase().includes(keyword)
                 );
@@ -774,7 +774,7 @@ RAISON: Clickbait utilisant langage émotionnel et théorie du complot sans aucu
 
             // 5. Détection de dates récentes (indicateur de fraîcheur)
             const currentYear = new Date().getFullYear();
-            const yearRegex = new RegExp(`(${currentYear}|${currentYear-1}|${currentYear-2})`, 'g');
+            const yearRegex = new RegExp(`(${currentYear}|${currentYear - 1}|${currentYear - 2})`, 'g');
             const recentDates = text.match(yearRegex);
             if (recentDates && recentDates.length > 0) {
                 score += 5;
@@ -937,6 +937,16 @@ RAISON: Clickbait utilisant langage émotionnel et théorie du complot sans aucu
         }
 
         async analyzeText(text) {
+            // Vérifier si TruthBot est activé (via l'instance globale si possible, sinon on suppose activé pour l'API interne)
+            // Note: L'appelant (TruthBot.analyze) devrait vérifier, mais on double-check ici
+            if (window.TruthBot && !window.TruthBot.isEnabled()) {
+                return {
+                    error: true,
+                    message: 'TruthBot est désactivé'
+
+                };
+            }
+
             if (!text || text.length < CONFIG.thresholds.minTextLength) {
                 return {
                     error: true,
@@ -987,27 +997,58 @@ RAISON: Clickbait utilisant langage émotionnel et théorie du complot sans aucu
         }
 
         initialize() {
-            this.createWidget();
+            // this.createWidget(); // Widget is now created by the integrator (demo.html)
             this.createTooltip();
             this.createModal();
+            this.createToggleControl(); // Nouveau bouton de contrôle
             this.attachEventListeners();
         }
 
-        createWidget() {
-            // Bouton flottant en bas à droite
-            this.widget = document.createElement('div');
-            this.widget.id = 'truthbot-widget';
-            this.widget.className = 'truthbot-widget';
-            this.widget.innerHTML = `
-                <button class="truthbot-btn" title="TruthBot - Détecteur de désinformation">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 12l2 2 4-4"/>
-                        <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                    <span>TruthBot</span>
-                </button>
+        createToggleControl() {
+            this.toggleBtn = document.createElement('button');
+            this.toggleBtn.id = 'truthbot-toggle';
+            this.toggleBtn.className = 'truthbot-toggle-btn';
+            this.toggleBtn.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                z-index: 9999;
+                padding: 10px 15px;
+                border-radius: 30px;
+                border: none;
+                cursor: pointer;
+                font-family: inherit;
+                font-weight: 600;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 8px;
             `;
-            document.body.appendChild(this.widget);
+
+            this.updateToggleState(window.TruthBot.isEnabled());
+
+            this.toggleBtn.addEventListener('click', () => {
+                window.TruthBot.toggle();
+            });
+
+            document.body.appendChild(this.toggleBtn);
+        }
+
+        updateToggleState(enabled) {
+            if (!this.toggleBtn) return;
+
+            if (enabled) {
+                this.toggleBtn.innerHTML = '<span>🟢 TruthBot ON</span>';
+                this.toggleBtn.style.backgroundColor = '#2d5f3f'; // Vert foncé
+                this.toggleBtn.style.color = 'white';
+                this.toggleBtn.title = 'Désactiver TruthBot';
+            } else {
+                this.toggleBtn.innerHTML = '<span>🔴 TruthBot OFF</span>';
+                this.toggleBtn.style.backgroundColor = '#e74c3c'; // Rouge
+                this.toggleBtn.style.color = 'white';
+                this.toggleBtn.title = 'Activer TruthBot';
+            }
         }
 
         createTooltip() {
@@ -1041,8 +1082,9 @@ RAISON: Clickbait utilisant langage émotionnel et théorie du complot sans aucu
 
         attachEventListeners() {
             // Click sur le widget principal
-            const btn = this.widget.querySelector('.truthbot-btn');
-            btn.addEventListener('click', () => this.openAnalysisModal());
+            // const btn = this.widget.querySelector('.truthbot-btn');
+            // L'événement click est maintenant géré par l'intégrateur (demo.html)
+            // btn.addEventListener('click', () => this.openAnalysisModal());
 
             // Fermeture du modal
             const closeBtn = this.modal.querySelector('.truthbot-close');
@@ -1128,6 +1170,11 @@ RAISON: Clickbait utilisant langage émotionnel et théorie du complot sans aucu
         }
 
         async handleHover(element) {
+            // Vérifier si TruthBot est activé
+            if (!window.TruthBot.isEnabled()) {
+                return;
+            }
+
             // Extraire le texte de l'élément
             const text = this.extractText(element);
 
@@ -1300,50 +1347,7 @@ RAISON: Clickbait utilisant langage émotionnel et théorie du complot sans aucu
             this.openDetailModal(text, result);
         }
 
-        async openAnalysisModal() {
-            // Ouvrir le modal avec un formulaire pour analyser du texte
-            const modalBody = this.modal.querySelector('.truthbot-modal-body');
-            modalBody.innerHTML = `
-                <div class="truthbot-input-section">
-                    <h4>Analysez un texte ou une URL</h4>
-                    <textarea id="truthbot-input-text"
-                              placeholder="Collez ici le texte ou l'URL à vérifier..."
-                              rows="6"></textarea>
-                    <button id="truthbot-analyze-btn" class="truthbot-btn-primary">
-                        Analyser
-                    </button>
-                </div>
-                <div id="truthbot-result-section" style="display:none;">
-                    <!-- Résultats ici -->
-                </div>
-            `;
 
-            this.modal.style.display = 'flex';
-
-            // Attacher l'événement d'analyse
-            const analyzeBtn = modalBody.querySelector('#truthbot-analyze-btn');
-            analyzeBtn.addEventListener('click', async () => {
-                const input = modalBody.querySelector('#truthbot-input-text').value;
-                if (!input || input.trim().length < CONFIG.thresholds.minTextLength) {
-                    alert('Veuillez entrer au moins 20 caractères à analyser.');
-                    return;
-                }
-
-                // Afficher un loader
-                analyzeBtn.disabled = true;
-                analyzeBtn.textContent = '⏳ Analyse en cours...';
-
-                try {
-                    const result = await this.engine.analyzeText(input.trim());
-                    this.displayDetailedResult(input.trim(), result);
-                } catch (error) {
-                    alert('Erreur lors de l\'analyse: ' + error.message);
-                } finally {
-                    analyzeBtn.disabled = false;
-                    analyzeBtn.textContent = 'Analyser';
-                }
-            });
-        }
 
         openDetailModal(text, result) {
             this.hideTooltip(); // Cacher le tooltip avant d'ouvrir le modal
@@ -1461,8 +1465,28 @@ RAISON: Clickbait utilisant langage émotionnel et théorie du complot sans aucu
             // Fusionner la configuration utilisateur
             Object.assign(CONFIG, userConfig);
 
+            // État d'activation (persistant)
+            this.enabled = localStorage.getItem('truthbot_enabled') !== 'false'; // Par défaut true
+
             this.engine = new TruthBotEngine();
             this.ui = null;
+        }
+
+        isEnabled() {
+            return this.enabled;
+        }
+
+        toggle() {
+            this.enabled = !this.enabled;
+            localStorage.setItem('truthbot_enabled', this.enabled);
+
+            // Mettre à jour l'UI si elle existe
+            if (this.ui) {
+                this.ui.updateToggleState(this.enabled);
+            }
+
+            console.log(`TruthBot ${this.enabled ? 'activé' : 'désactivé'}`);
+            return this.enabled;
         }
 
         init() {
@@ -1523,6 +1547,12 @@ RAISON: Clickbait utilisant langage émotionnel et théorie du complot sans aucu
         }
 
         async analyze(text) {
+            if (!this.isEnabled()) {
+                return {
+                    error: true,
+                    message: 'TruthBot est désactivé'
+                };
+            }
             return await this.engine.analyzeText(text);
         }
 
