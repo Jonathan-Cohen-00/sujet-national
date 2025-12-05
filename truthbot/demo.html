@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -264,8 +265,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
         }
 
         .hover-hint strong {
@@ -290,6 +298,7 @@
     <!-- Intégration du TruthBot -->
     <script src="truthbot.js"></script>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -331,7 +340,8 @@
             <h2>🧪 Testez TruthBot en Action</h2>
 
             <div class="hover-hint">
-                <strong>💡 Astuce :</strong> Survolez les textes ci-dessous avec votre souris pour voir TruthBot en action !
+                <strong>💡 Astuce :</strong> Survolez les textes ci-dessous avec votre souris pour voir TruthBot en
+                action !
                 Vous pouvez aussi cliquer sur le bouton TruthBot en bas à droite de l'écran.
             </div>
 
@@ -394,7 +404,8 @@
             <ul class="features-list">
                 <li><strong>Détection au survol</strong> : Analysez du texte simplement en passant la souris</li>
                 <li><strong>Score de fiabilité</strong> : Évaluation agrégée de 0 à 100 basée sur plusieurs sources</li>
-                <li><strong>Analyse heuristique</strong> : Détection de patterns suspects (caps lock, ponctuation excessive, etc.)</li>
+                <li><strong>Analyse heuristique</strong> : Détection de patterns suspects (caps lock, ponctuation
+                    excessive, etc.)</li>
                 <li><strong>APIs de fact-checking</strong> : Intégration avec Google Fact Check Tools API</li>
                 <li><strong>Interface intuitive</strong> : Tooltip rapide et modal détaillé</li>
                 <li><strong>Design responsive</strong> : Fonctionne sur desktop, tablette et mobile</li>
@@ -419,7 +430,8 @@
             <pre>&lt;script src="truthbot/truthbot.js"&gt;&lt;/script&gt;</pre>
 
             <h3>Étape 3 : C'est tout !</h3>
-            <p>TruthBot est maintenant actif sur votre page. Le bouton apparaît en bas à droite et le survol fonctionne automatiquement.</p>
+            <p>TruthBot est maintenant actif sur votre page. Le bouton apparaît en bas à droite et le survol fonctionne
+                automatiquement.</p>
 
             <h3>Configuration Avancée (Optionnel)</h3>
             <p>Pour activer l'API Google Gemini pour un fact-checking intelligent, ajoutez ceci avant le script :</p>
@@ -445,7 +457,8 @@ window.TruthBotConfig = {
                 4. Copiez la clé générée<br>
                 <br>
                 <strong>Étape 2 : Activer l'API Generative Language</strong><br>
-                5. Visitez <a href="https://console.developers.google.com/apis/api/generativelanguage.googleapis.com" target="_blank">Google Cloud Console - Generative Language API</a><br>
+                5. Visitez <a href="https://console.developers.google.com/apis/api/generativelanguage.googleapis.com"
+                    target="_blank">Google Cloud Console - Generative Language API</a><br>
                 6. Sélectionnez votre projet (ou créez-en un nouveau)<br>
                 7. Cliquez sur le bouton <strong>"ACTIVER"</strong> (Enable)<br>
                 8. Attendez quelques minutes que l'activation se propage<br>
@@ -565,10 +578,24 @@ window.TruthBotConfig = {
             <p><em>Intelligence Artificielle et Lutte contre la Désinformation</em></p>
             <p style="margin-top: 24px;">
                 <a href="https://github.com" style="color: #6b9f7f; text-decoration: none;">GitHub</a> •
-                <a href="mailto:abdelghader.khadijetou@gmail.com" style="color: #6b9f7f; text-decoration: none;">Contact</a> •
+                <a href="mailto:abdelghader.khadijetou@gmail.com"
+                    style="color: #6b9f7f; text-decoration: none;">Contact</a> •
                 <a href="https://ai4good.org" style="color: #6b9f7f; text-decoration: none;">AI4GOOD</a>
             </p>
         </footer>
+    </div>
+
+
+
+    <!-- Widget TruthBot (ajouté manuellement) -->
+    <div id="truthbot-widget" class="truthbot-widget">
+        <button class="truthbot-btn" title="TruthBot - Détecteur de désinformation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12l2 2 4-4" />
+                <circle cx="12" cy="12" r="10" />
+            </svg>
+            <span>TruthBot</span>
+        </button>
     </div>
 
     <!-- Configuration optionnelle de TruthBot -->
@@ -587,6 +614,87 @@ window.TruthBotConfig = {
             });
         }
         */
+
+        // Logique personnalisée pour l'ouverture du modal d'analyse
+        window.addEventListener('load', () => {
+            const truthBot = window.TruthBot;
+            if (!truthBot || !truthBot.ui) {
+                console.error('TruthBot non initialisé');
+                return;
+            }
+
+            // Fonction pour ouvrir le modal d'analyse
+            // Cette logique a été déplacée de truthbot.js vers ici pour plus de flexibilité
+            function openAnalysisModal() {
+                const modal = truthBot.ui.modal;
+                const modalBody = modal.querySelector('.truthbot-modal-body');
+
+                modalBody.innerHTML = `
+                    <div class="truthbot-input-section">
+                        <h4>Analysez un texte ou une URL</h4>
+                        <textarea id="truthbot-input-text"
+                                  placeholder="Collez ici le texte ou l'URL à vérifier..."
+                                  rows="6"></textarea>
+                        <button id="truthbot-analyze-btn" class="truthbot-btn-primary">
+                            Analyser
+                        </button>
+                    </div>
+                    <div id="truthbot-result-section" style="display:none;">
+                        <!-- Résultats ici -->
+                    </div>
+                `;
+
+                modal.style.display = 'flex';
+
+                // Attacher l'événement d'analyse
+                const analyzeBtn = modalBody.querySelector('#truthbot-analyze-btn');
+                analyzeBtn.addEventListener('click', async () => {
+                    const input = modalBody.querySelector('#truthbot-input-text').value;
+                    const minLength = 20; // Seuil codé en dur ici car CONFIG n'est pas exposé
+
+                    if (!input || input.trim().length < minLength) {
+                        alert('Veuillez entrer au moins 20 caractères à analyser.');
+                        return;
+                    }
+
+                    // Afficher un loader
+                    analyzeBtn.disabled = true;
+                    analyzeBtn.textContent = '⏳ Analyse en cours...';
+
+                    try {
+                        // Utiliser l'API publique de TruthBot
+                        const result = await truthBot.analyze(input.trim());
+
+                        // Utiliser la méthode d'affichage de l'UI (si disponible)
+                        // Note: displayDetailedResult est une méthode de TruthBotUI
+                        if (truthBot.ui.displayDetailedResult) {
+                            truthBot.ui.displayDetailedResult(input.trim(), result);
+                        } else {
+                            // Fallback si la méthode n'est pas accessible
+                            console.log('Résultat:', result);
+                            alert('Analyse terminée. Voir la console pour les détails.');
+                        }
+                    } catch (error) {
+                        alert('Erreur lors de l\'analyse: ' + error.message);
+                    } finally {
+                        analyzeBtn.disabled = false;
+                        analyzeBtn.textContent = 'Analyser';
+                    }
+                });
+            }
+
+            // Attacher cette fonction au bouton du widget
+            const widgetBtn = document.querySelector('#truthbot-widget .truthbot-btn');
+            if (widgetBtn) {
+                // Cloner le bouton pour supprimer les anciens écouteurs (si existants)
+                const newBtn = widgetBtn.cloneNode(true);
+                widgetBtn.parentNode.replaceChild(newBtn, widgetBtn);
+
+                newBtn.addEventListener('click', openAnalysisModal);
+                console.log('TruthBot: Logique d\'analyse personnalisée attachée');
+            }
+        });
     </script>
 </body>
+
 </html>
