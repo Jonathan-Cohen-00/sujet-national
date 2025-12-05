@@ -21,7 +21,7 @@
             // Google Gemini API pour fact-checking intelligent
             geminiFactCheck: {
                 enabled: true,
-                apiKey: 'AIzaSyDwb01iRnCEZbjC6L6on_4o506pP_V47NY', // À configurer par l'utilisateur
+                apiKey: 'AIzaSyAW33h7Z_Wj3PkHoWBAu4PwSwXSlGOCAF0', // À configurer par l'utilisateur
                 endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',
                 model: 'gemini-2.5-flash', // Ce modèle fonctionne, on augmente juste les tokens
                 fallbackModels: [] // Pas de fallback
