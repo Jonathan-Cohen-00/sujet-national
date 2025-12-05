@@ -304,17 +304,17 @@
                     }
 
                     // Gestion spécifique pour quota dépassé (429)
-                    if (errorData.error && errorData.error.code === 429) {
+                    if (errorData.error && (errorData.error.code === 429 || errorData.error.status === 'RESOURCE_EXHAUSTED')) {
                         return {
                             score: null,
                             confidence: 0,
                             source: 'Gemini AI',
-                            message: 'Quota dépassé',
-                            warnings: ['Limite d\'utilisation Gemini atteinte'],
+                            message: 'Service temporairement saturé',
+                            warnings: ['L\'IA est victime de son succès !'],
                             details: [
-                                'Les autres analyseurs fonctionnent toujours',
-                                'Attendez quelques minutes ou vérifiez votre quota sur:',
-                                'https://ai.dev/usage'
+                                'Le quota gratuit de Gemini est atteint pour le moment.',
+                                'Pas de panique, réessayez dans quelques secondes.',
+                                'Les autres analyses (heuristiques) fonctionnent toujours.'
                             ]
                         };
                     }

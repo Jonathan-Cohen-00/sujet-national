@@ -406,7 +406,7 @@
                 <li><strong>Score de fiabilité</strong> : Évaluation agrégée de 0 à 100 basée sur plusieurs sources</li>
                 <li><strong>Analyse heuristique</strong> : Détection de patterns suspects (caps lock, ponctuation
                     excessive, etc.)</li>
-                <li><strong>APIs de fact-checking</strong> : Intégration avec Google Fact Check Tools API</li>
+                <li><strong>APIs de fact-checking</strong> : Intégration avec Google Gemini AI</li>
                 <li><strong>Interface intuitive</strong> : Tooltip rapide et modal détaillé</li>
                 <li><strong>Design responsive</strong> : Fonctionne sur desktop, tablette et mobile</li>
                 <li><strong>Thème personnalisable</strong> : S'adapte au style de votre site</li>
@@ -606,7 +606,7 @@ window.TruthBotConfig = {
         if (window.TruthBot) {
             window.TruthBot.configure({
                 apis: {
-                    googleFactCheck: {
+                    geminiFactCheck: {
                         enabled: true,
                         apiKey: 'VOTRE_CLE_API'
                     }
