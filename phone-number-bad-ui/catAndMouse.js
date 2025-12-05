@@ -22,6 +22,7 @@ function createModalContent() {
         <header class="at-right">
           <button class="close-btn" aria-label="Fermer la modale">&times;</button>
         </header>
+        <div id="phone-number-field"></div>
         <div id="game-container">
             <div class="tile-container">
                 <div class="tile" data-id="1">1</div>
@@ -51,18 +52,18 @@ function createModalContent() {
                 <div class="tile" data-id="9">9</div>
             </div>
             <div class="tile-container">
-                <div class="tile tile-text" data-id="X">Annuler</div>
+                <div class="tile tile-text tile-cancel" data-id="X">Annuler</div>
             </div>
             <div class="tile-container">
                 <div class="tile" data-id="0">0</div>
             </div>
             <div class="tile-container">
-                <div class="tile tile-text" data-id="V">Valider</div>
+                <div class="tile tile-text tile-validate" data-id="V">Valider</div>
             </div>
             
             <img id="cat" src="images/mad_windows.png">
         </div>
-        <div id="phone-number-field"></div>
+        
       `;
 
     backdrop.appendChild(modal);
@@ -150,6 +151,7 @@ function getTileAtCatPosition() {
     const tileContainers = document.querySelectorAll(".tile");
 
     for (const tile of tileContainers) {
+        tile.classList.remove('active');
         const r = tile.getBoundingClientRect();
         if (
             centerX >= r.left &&
@@ -157,6 +159,7 @@ function getTileAtCatPosition() {
             centerY >= r.top &&
             centerY <= r.bottom
         ) {
+            tile.classList.add('active');
             return tile.dataset.id;
         }
     }
@@ -290,7 +293,7 @@ function gameLoop() {
         modal.innerHTML =
             `
         <div class="center-column">
-            <h1>Windows vous a rattrapé!</h1>
+            <h1>Windows vous a attrapé!</h1>
             
             <img src="images/bill_gates.png" style="width: 70%; height: 70%;">
             <p>Vous avez mis à jour votre système vers Windows 11. 
@@ -339,7 +342,7 @@ function gameLoop() {
         </div>
         `;
 
-        subbackdrop.appendChild(modal);70
+        subbackdrop.appendChild(modal);
 
         backdrop.appendChild(subbackdrop);
 

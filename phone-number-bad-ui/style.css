@@ -117,10 +117,11 @@ body {
 #phone-number-field {
     width: 100%;
     text-align: center;
-    margin-top: 10px;
+    margin-bottom: 10px;
     background-color: white;
     border-radius: 10px;
     border: 1px solid black;
+    font-weight: bold;
 }
 
 #confirm {
@@ -142,5 +143,17 @@ body {
 
 .tuxedoicon {
     cursor: url("images/tuxicon.png") 32 32, auto;
+}
+
+.tile-cancel {
+    background-color: indianred;
+}
+
+.tile-validate {
+    background-color: forestgreen;
+}
+
+.active {
+    border: 3px solid black;
 }
 
