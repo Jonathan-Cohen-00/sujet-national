@@ -102,6 +102,18 @@ input:focus, textarea:focus {
     transition: 0.2s;
 }
 
+.submit-button {
+    padding: 12px;
+    background: #f4a261;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
 #game-launch-button:hover {
     background: #f4a000;
 }
