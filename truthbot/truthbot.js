@@ -1,6 +1,7 @@
 /**
  * TruthBot - AI-Powered Fact-Checking Widget
- * Défi AI4GOOD - Nuit de l'Info 2024
+ * Défi Nuit de l'Info 2025
+ * Équipe Dreamers - Paris 1 Panthéon-Sorbonne
  *
  * Widget pluggable pour détecter la désinformation sur n'importe quel site web.
  * Analyse du texte et des images au survol avec multiple APIs de fact-checking.
@@ -29,10 +30,9 @@
             localAnalysis: {
                 enabled: true
             },
-            // Analyse sémantique avancée (utilise une API externe)
+            // Analyse sémantique avancée (locale)
             semanticAnalysis: {
-                enabled: true,
-                endpoint: 'https://api.semanticscholar.org/v1/paper/search'
+                enabled: true
             }
         },
         // Seuils de détection
