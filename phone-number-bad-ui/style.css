@@ -38,10 +38,6 @@ body {
     margin-bottom: 15px;
 }
 
-.game-container {
-
-}
-
 .phone-number-field {
     width: 100%;
     display: flex;
@@ -57,6 +53,8 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, 1fr);
     border: 2px solid black;
+
+    background-color: lightgoldenrodyellow;
 }
 
 .tile-container {
@@ -68,8 +66,8 @@ body {
 
 .tile {
     background-color: grey;
-    height: 80%;
-    width: 80%;
+    height: 70%;
+    aspect-ratio: 1/1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,15 +76,28 @@ body {
 /* l’objet qui se déplace */
 #cat {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    background: red;
-    border-radius: 50%;
+    width: 60px;
+    height: 60px;
     transition: transform 0.1s linear;
 
     left: 0;
     top: 0;
+}
+
+#phone-number-field {
+    width: 100%;
+    height: 4%;
+}
 
 
+.center-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.space-between {
+
+    justify-content: space-between;
 }
 
