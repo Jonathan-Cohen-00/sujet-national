@@ -51,13 +51,13 @@ function createModalContent() {
                 <div class="tile" data-id="9">9</div>
             </div>
             <div class="tile-container">
-                <div class="tile" data-id="X">X</div>
+                <div class="tile tile-text" data-id="X">Annuler</div>
             </div>
             <div class="tile-container">
                 <div class="tile" data-id="0">0</div>
             </div>
             <div class="tile-container">
-                <div class="tile" data-id="V">V</div>
+                <div class="tile tile-text" data-id="V">Valider</div>
             </div>
             
             <img id="cat" src="images/mad_windows.png">
@@ -167,6 +167,8 @@ function gameLoop() {
     const cat = document.getElementById("cat");
     const board = document.getElementById("game-container");
 
+    board.classList.add('tuxedoicon');
+
     let catX = 100;
     let catY = 100;
     let mouseX = window.innerWidth / 2;
@@ -181,7 +183,7 @@ function gameLoop() {
         mouseY = e.clientY - rect.top - 20;
     });
 
-    let speed = 300; // Pixels / Sec
+    let speed = 350; // Pixels / Sec
 
     requestAnimationFrame(updateCatPosition);
 
@@ -242,7 +244,9 @@ function gameLoop() {
             "rgb(220, 150, 140)",
             "rgb(210, 140, 130)",
             "rgb(200, 120, 120)",
-            "rgb(241,110,100)"]
+            "rgb(193,109,109)",
+            "rgb(241,110,100)",
+        ]
 
         if (value === "X") {
             field.textContent = "";
@@ -265,7 +269,7 @@ function gameLoop() {
         else {
             if (field.textContent.length < 10) {
                 field.textContent += value;
-                speed += 20;
+                speed += 15;
                 modal.style.backgroundColor = colors[currentColor++];
             }
         }
@@ -293,7 +297,7 @@ function gameLoop() {
             Bill Gates continue à s'enrichir!
             </p>
             
-            <button id="retry">Retry</button>
+            <button id="retry">Réessayer</button>
         </div>
         `;
 
@@ -325,10 +329,13 @@ function gameLoop() {
         <div class="center-column">
             <h1>Numéro de téléphone invalide!</h1>
             
-            <img src="images/sad_tux.png" style="width: 70%; height: 70%;">
-            <p>Tux n'a pas réussi à accomplir sa mission...</p>
+            <div class="center-column">
+                <img src="images/sad_tux.png" style="width: 100%; height: 70%;">
+                
+                <p>Tux n'a pas réussi à accomplir sa mission...</p>
+                <button id="retry">Réessayer</button>
+            </div>
             
-            <button id="retry">Retry</button>
         </div>
         `;
 
@@ -362,14 +369,14 @@ function gameLoop() {
         <div class="center-column space-between">
             <h1>Félicitations!</h1>
             
-            <img src="images/happy_tux.png" style="width: 60%; height: 60%;">
+            <img src="images/happy_tux.png" style="width: 60%; height: 60%; border: 3px solid black; border-radius: 20px">
             
             <div class="center-column">
                 <p>Vous avez entré un numéro de téléphone valide ! Tux a réussi sa mission !</p>
                 <p id="entered-phone-number">Est ce bien votre numéro ?</p>
                 <div class="buttons">
-                    <button id="confirm">Confirm</button>
-                    <button id="retry">Retry</button>
+                    <button id="confirm">Oui !</button>
+                    <button id="retry">Non...</button>
                 </div>
             </div>
             

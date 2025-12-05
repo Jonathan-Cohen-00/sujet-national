@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Science+Gothic:wght@100..900&display=swap');
+
 body {
     margin: 0;
 }
@@ -65,12 +67,22 @@ body {
 }
 
 .tile {
-    background-color: grey;
+    background-color: slateblue;
     height: 70%;
+    max-height: 70%;
     aspect-ratio: 1/1;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    font-family: 'Science Gothic', serif;
+    font-size: 3em;
+    color: white;
+    border-radius: 10px;
+}
+
+.tile-text {
+    font-size: 1.5em;
 }
 
 /* l’objet qui se déplace */
@@ -94,10 +106,41 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 .space-between {
 
     justify-content: space-between;
+}
+
+#phone-number-field {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+#confirm {
+    background-color: greenyellow;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+#retry {
+    background-color: gold;
+    color: black;
+    border: 1px solid black;
+    padding: 10px 20px;    border-radius: 10px;
+    margin-left: 10px;
+
+}
+
+.tuxedoicon {
+    cursor: url("images/tuxicon.png") 32 32, auto;
 }
 
