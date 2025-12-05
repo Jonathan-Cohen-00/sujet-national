@@ -3,13 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>StupidForm</title>
+        <title>Linux Newletter</title>
         <link rel="stylesheet" href="style.css">
+
     </head>
-    <body>
+    <body class="newsletter-container">
         <div class="fullpage-container">
-            <input id="phone-number-input-field" type="text" disabled>
+            <h1>📰 Linux Newsletter</h1>
+            <p>Abonne-toi pour rejoindre la grande communauté des adorateurs du Pingouin.</p>
+            <label class="input-label">Nom</label>
+            <input type="text" placeholder="Votre nom">
+            <label class="input-label">Adresse email</label>
+            <input type="email" placeholder="exemple@linuxmail.fr">
+            <input id="phone-number-input-field" type="text" placeholder="0000000000" disabled>
             <button id="game-launch-button">Entrer numéro de téléphone...</button>
+            <label class="input-label">Message (optionnel)</label>
+            <textarea rows="3" placeholder="Pourquoi aimez-vous Linux ?"></textarea>
         </div>
         <div id="game-modal" aria-hidden="true"></div>
     </body>

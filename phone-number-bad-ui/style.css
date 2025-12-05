@@ -1,17 +1,119 @@
 @import url('https://fonts.googleapis.com/css2?family=Science+Gothic:wght@100..900&display=swap');
 
+
 body {
     margin: 0;
+    padding: 0;
+    background: #FAF3E0; /* soft cream */
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #2d5f3f;
+}
+
+.fullpage-container {
+    max-width: 420px;
+    margin: 50px auto;
+    padding: 30px 35px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 18px; /* perfect spacing between elements */
+}
+
+.fullpage-container h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    text-align: center;
+    color: #2d5f3f;
+}
+
+.fullpage-container p {
+    margin: 0;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.input-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #6b9f7f;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.newsletter-card {
+    background: white;
+    width: 95%;
+    max-width: 480px;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+p {
+    text-align: center;
+}
+
+.input-label {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+input, textarea {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 2px solid var(--secondary-color);
+    font-size: 1rem;
+    transition: 0.2s;
+}
+
+input:focus, textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 8px rgba(244,162,97,0.35);
+}
+
+#game-launch-button {
+    padding: 12px;
+    background: #f4a261;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#game-launch-button:hover {
+    background: #f4a000;
 }
 
 .fullpage-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    background-color: lightblue;
+    background-color: #FAF3E0;
 }
 
 .modal-backdrop {
@@ -156,4 +258,3 @@ body {
 .active {
     border: 3px solid black;
 }
-
