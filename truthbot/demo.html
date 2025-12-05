@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruthBot - Démonstration | Défi AI4GOOD</title>
+    <style>
+        /* Styles pour la page de démo */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d3561 100%);
+            color: #dfe6e9;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #6b9f7f 0%, #f4a261 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #b2bec3;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #2d5f3f 0%, #6b9f7f 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .demo-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: #2d3436;
+        }
+
+        .demo-section h2 {
+            color: #2d5f3f;
+            margin-bottom: 24px;
+            font-size: 28px;
+            border-left: 5px solid #6b9f7f;
+            padding-left: 16px;
+        }
+
+        .demo-section h3 {
+            color: #2d5f3f;
+            margin: 24px 0 12px 0;
+            font-size: 20px;
+        }
+
+        .example-box {
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #2d5f3f;
+            border-radius: 8px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .example-box:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .example-box strong {
+            display: block;
+            color: #2d5f3f;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .example-box.suspicious {
+            border-left-color: #e74c3c;
+        }
+
+        .example-box.suspicious strong {
+            color: #e74c3c;
+        }
+
+        .example-box.reliable {
+            border-left-color: #27ae60;
+        }
+
+        .example-box.reliable strong {
+            color: #27ae60;
+        }
+
+        .instructions {
+            background: #d1ecf1;
+            border-left: 4px solid #3498db;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+
+        .instructions strong {
+            color: #0c5460;
+        }
+
+        code {
+            background: #2d3436;
+            color: #00ff00;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        pre {
+            background: #2d3436;
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        .card {
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            margin: 0 0 12px 0;
+            color: #2d5f3f;
+        }
+
+        .card p {
+            margin: 0;
+            color: #636e72;
+            font-size: 14px;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #2d5f3f 0%, #6b9f7f 100%);
+            border-radius: 16px;
+            color: white;
+            margin-top: 60px;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 16px;
+            font-size: 32px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: white;
+            color: #2d5f3f;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            margin: 8px 0;
+            color: #b2bec3;
+        }
+
+        .hover-hint {
+            background: #fff3cd;
+            border-left: 4px solid #f39c12;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 24px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .hover-hint strong {
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .demo-section {
+                padding: 24px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <!-- Intégration du TruthBot -->
+    <script src="truthbot.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 TruthBot</h1>
+            <p class="subtitle">Détecteur de Désinformation Intelligent</p>
+            <span class="badge">Défi AI4GOOD - Nuit de l'Info 2024</span>
+        </header>
+
+        <!-- Section d'introduction -->
+        <section class="demo-section">
+            <h2>🎯 Qu'est-ce que TruthBot ?</h2>
+            <p>
+                TruthBot est un widget intelligent qui aide à combattre la désinformation en ligne.
+                Développé pour le défi <strong>AI4GOOD</strong>, il utilise plusieurs sources de vérification
+                pour évaluer la fiabilité des contenus web.
+            </p>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">🔍</div>
+                    <h3>Analyse Multi-Sources</h3>
+                    <p>Combine plusieurs APIs de fact-checking pour une évaluation fiable</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Détection au Survol</h3>
+                    <p>Analyse instantanée du contenu simplement en passant la souris</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔌</div>
+                    <h3>Facile à Intégrer</h3>
+                    <p>Une seule ligne de code pour l'ajouter à votre site web</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section de démonstration -->
+        <section class="demo-section">
+            <h2>🧪 Testez TruthBot en Action</h2>
+
+            <div class="hover-hint">
+                <strong>💡 Astuce :</strong> Survolez les textes ci-dessous avec votre souris pour voir TruthBot en action !
+                Vous pouvez aussi cliquer sur le bouton TruthBot en bas à droite de l'écran.
+            </div>
+
+            <h3>Exemple 1 : Contenu Fiable</h3>
+            <div class="example-box reliable">
+                <strong>Information Vérifiée</strong>
+                <p>
+                    Selon une étude publiée par l'Organisation Mondiale de la Santé (OMS) en 2023,
+                    les logiciels libres contribuent à réduire la fracture numérique dans les pays
+                    en développement. L'étude cite des données de l'UNESCO et a été publiée dans
+                    plusieurs revues scientifiques à comité de lecture.
+                    Source : <a href="https://who.int">who.int</a>
+                </p>
+            </div>
+
+            <h3>Exemple 2 : Contenu Suspect</h3>
+            <div class="example-box suspicious">
+                <strong>⚠️ Information à Vérifier</strong>
+                <p>
+                    INCROYABLE !!! URGENT !!! ILS NE VEULENT PAS QUE VOUS SACHIEZ CECI !!!
+                    Une RÉVÉLATION CHOQUANTE qui va changer votre vie ! PARTAGEZ AVANT CENSURE !!!
+                    Ce SECRET caché depuis des années enfin révélé ! Vous n'allez pas croire ce qui se passe !
+                </p>
+            </div>
+
+            <h3>Exemple 3 : Contenu Neutre</h3>
+            <div class="example-box">
+                <strong>Texte Ordinaire</strong>
+                <p>
+                    Le projet NIRD (Numérique Inclusif, Responsable et Durable) vise à promouvoir
+                    l'utilisation de logiciels libres dans les établissements scolaires. Cette initiative
+                    encourage la réduction de la dépendance aux logiciels propriétaires et favorise
+                    le reconditionnement de matériel informatique.
+                </p>
+            </div>
+            <h3>Exemple 4 : Contenu Faux scientifiquement</h3>
+            <div class="example-box">
+                <strong>Texte Ordinaire</strong>
+                <p> La terre est plate
+                </p>
+            </div>
+
+            <h3>Exemple 4 : Article avec Sources</h3>
+            <div class="example-box reliable">
+                <strong>Article Documenté</strong>
+                <p>
+                    D'après l'Agence France-Presse (AFP), les deepfakes représentent une menace
+                    croissante pour l'intégrité de l'information. Une étude menée par l'université
+                    de Stanford en 2024 montre que 60% des internautes ont déjà été exposés à
+                    des contenus manipulés. Les chercheurs recommandent l'utilisation d'outils
+                    de vérification automatisés.
+                    Sources : AFP, Stanford University, Nature Communications.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section des fonctionnalités -->
+        <section class="demo-section">
+            <h2>✨ Fonctionnalités</h2>
+            <ul class="features-list">
+                <li><strong>Détection au survol</strong> : Analysez du texte simplement en passant la souris</li>
+                <li><strong>Score de fiabilité</strong> : Évaluation agrégée de 0 à 100 basée sur plusieurs sources</li>
+                <li><strong>Analyse heuristique</strong> : Détection de patterns suspects (caps lock, ponctuation excessive, etc.)</li>
+                <li><strong>APIs de fact-checking</strong> : Intégration avec Google Fact Check Tools API</li>
+                <li><strong>Interface intuitive</strong> : Tooltip rapide et modal détaillé</li>
+                <li><strong>Design responsive</strong> : Fonctionne sur desktop, tablette et mobile</li>
+                <li><strong>Thème personnalisable</strong> : S'adapte au style de votre site</li>
+                <li><strong>Zero configuration</strong> : Fonctionne dès l'installation (mode démo)</li>
+            </ul>
+        </section>
+
+        <!-- Section d'intégration -->
+        <section class="demo-section">
+            <h2>🔌 Comment Intégrer TruthBot</h2>
+
+            <div class="instructions">
+                <strong>📝 Intégration en 3 étapes simples :</strong>
+            </div>
+
+            <h3>Étape 1 : Télécharger les fichiers</h3>
+            <p>Téléchargez le dossier <code>/truthbot</code> et placez-le dans votre projet.</p>
+
+            <h3>Étape 2 : Ajouter le script</h3>
+            <p>Ajoutez cette ligne dans votre HTML, juste avant la fermeture de <code>&lt;/body&gt;</code> :</p>
+            <pre>&lt;script src="truthbot/truthbot.js"&gt;&lt;/script&gt;</pre>
+
+            <h3>Étape 3 : C'est tout !</h3>
+            <p>TruthBot est maintenant actif sur votre page. Le bouton apparaît en bas à droite et le survol fonctionne automatiquement.</p>
+
+            <h3>Configuration Avancée (Optionnel)</h3>
+            <p>Pour activer l'API Google Gemini pour un fact-checking intelligent, ajoutez ceci avant le script :</p>
+            <pre>&lt;script&gt;
+window.TruthBotConfig = {
+    apis: {
+        geminiFactCheck: {
+            enabled: true,
+            apiKey: 'VOTRE_CLE_API'
+        }
+    }
+};
+&lt;/script&gt;
+&lt;script src="truthbot/truthbot.js"&gt;&lt;/script&gt;</pre>
+
+            <div class="instructions">
+                <strong>🔑 Comment obtenir et configurer une clé API Google Gemini (gratuit) :</strong><br>
+                <br>
+                <strong>Étape 1 : Créer une clé API</strong><br>
+                1. Visitez <a href="https://makersuite.google.com/app/apikey" target="_blank">Google AI Studio</a><br>
+                2. Connectez-vous avec votre compte Google<br>
+                3. Cliquez sur "Create API Key" ou "Get API Key"<br>
+                4. Copiez la clé générée<br>
+                <br>
+                <strong>Étape 2 : Activer l'API Generative Language</strong><br>
+                5. Visitez <a href="https://console.developers.google.com/apis/api/generativelanguage.googleapis.com" target="_blank">Google Cloud Console - Generative Language API</a><br>
+                6. Sélectionnez votre projet (ou créez-en un nouveau)<br>
+                7. Cliquez sur le bouton <strong>"ACTIVER"</strong> (Enable)<br>
+                8. Attendez quelques minutes que l'activation se propage<br>
+                <br>
+                <strong>Étape 3 : Utilisez la clé dans TruthBot</strong><br>
+                9. Ajoutez la configuration dans votre HTML comme montré ci-dessus
+            </div>
+        </section>
+
+        <!-- Section technique -->
+        <section class="demo-section">
+            <h2>🔧 Détails Techniques</h2>
+
+            <h3>Analyseurs Intégrés</h3>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3>Analyse Heuristique</h3>
+                    <p>
+                        Détecte les patterns suspects : majuscules excessives, ponctuation,
+                        mots sensationnalistes, absence de sources, structure du texte.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">✨</div>
+                    <h3>Google Gemini AI</h3>
+                    <p>
+                        Utilise l'intelligence artificielle de Google Gemini pour analyser
+                        le contenu et détecter la désinformation en temps réel.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>Agrégation Intelligente</h3>
+                    <p>
+                        Combine les résultats de plusieurs sources avec pondération par
+                        niveau de confiance pour un score final fiable.
+                    </p>
+                </div>
+            </div>
+
+            <h3>Score de Fiabilité</h3>
+            <ul>
+                <li><strong>70-100</strong> : Contenu fiable ✅</li>
+                <li><strong>50-69</strong> : Contenu à vérifier ⚠️</li>
+                <li><strong>30-49</strong> : Contenu suspect ⚠️</li>
+                <li><strong>0-29</strong> : Contenu très suspect ❌</li>
+            </ul>
+
+            <h3>Compatibilité</h3>
+            <ul>
+                <li>✅ Tous les navigateurs modernes (Chrome, Firefox, Safari, Edge)</li>
+                <li>✅ Responsive (Desktop, Tablette, Mobile)</li>
+                <li>✅ Accessible (Navigation au clavier, lecteurs d'écran)</li>
+                <li>✅ Pas de dépendances externes (JavaScript vanilla)</li>
+            </ul>
+        </section>
+
+        <!-- Section éthique -->
+        <section class="demo-section">
+            <h2>🌱 Dimension Éthique et Responsable</h2>
+            <p>
+                TruthBot s'inscrit dans la mission d'<strong>AI4GOOD</strong> en utilisant l'intelligence
+                artificielle de manière responsable pour lutter contre la désinformation.
+            </p>
+
+            <h3>Principes Éthiques</h3>
+            <ul class="features-list">
+                <li>
+                    <strong>Transparence</strong> : Les sources d'analyse sont toujours indiquées,
+                    permettant à l'utilisateur de comprendre d'où vient l'évaluation
+                </li>
+                <li>
+                    <strong>Esprit Critique</strong> : TruthBot encourage les utilisateurs à vérifier
+                    les sources plutôt que de se fier aveuglément au score
+                </li>
+                <li>
+                    <strong>Pas de Censure</strong> : L'outil informe mais ne bloque pas l'accès
+                    au contenu, laissant le choix final à l'utilisateur
+                </li>
+                <li>
+                    <strong>Respect de la Vie Privée</strong> : Aucune donnée personnelle n'est collectée,
+                    pas de tracking, code open source
+                </li>
+                <li>
+                    <strong>Inclusif</strong> : Accessible à tous, gratuit, compatible avec les
+                    technologies d'assistance
+                </li>
+            </ul>
+
+            <h3>Impact Social</h3>
+            <p>
+                En sensibilisant les citoyens à l'esprit critique numérique, TruthBot contribue à :
+            </p>
+            <ul>
+                <li>Réduire la propagation de fausses informations</li>
+                <li>Améliorer la qualité du débat public en ligne</li>
+                <li>Protéger les populations vulnérables face à la manipulation</li>
+                <li>Promouvoir une utilisation éthique de l'IA</li>
+            </ul>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <h2>Prêt à Combattre la Désinformation ?</h2>
+            <p>Intégrez TruthBot sur votre site web dès aujourd'hui !</p>
+            <a href="https://github.com" class="cta-button">📥 Télécharger TruthBot</a>
+            <p style="margin-top: 24px; font-size: 14px; opacity: 0.9;">
+                Open Source • Gratuit • Respectueux de la Vie Privée
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p><strong>🤖 TruthBot</strong></p>
+            <p>Développé pour le défi <strong>AI4GOOD</strong> - Nuit de l'Info 2024</p>
+            <p><em>Intelligence Artificielle et Lutte contre la Désinformation</em></p>
+            <p style="margin-top: 24px;">
+                <a href="https://github.com" style="color: #6b9f7f; text-decoration: none;">GitHub</a> •
+                <a href="mailto:abdelghader.khadijetou@gmail.com" style="color: #6b9f7f; text-decoration: none;">Contact</a> •
+                <a href="https://ai4good.org" style="color: #6b9f7f; text-decoration: none;">AI4GOOD</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Configuration optionnelle de TruthBot -->
+    <script>
+        // Vous pouvez configurer TruthBot ici si besoin
+        // Par exemple, pour activer l'API Google Fact Check :
+        /*
+        if (window.TruthBot) {
+            window.TruthBot.configure({
+                apis: {
+                    googleFactCheck: {
+                        enabled: true,
+                        apiKey: 'VOTRE_CLE_API'
+                    }
+                }
+            });
+        }
+        */
+    </script>
+</body>
+</html>

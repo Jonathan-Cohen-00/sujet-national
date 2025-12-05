@@ -412,7 +412,17 @@
         <button onclick="showBadges()" class="footer-btn">🎖️ Voir mes badges</button>
         <button onclick="location.href='phone-number-bad-ui/form.html'" class="footer-btn">S'abonner à la newsletter ✉️</button>
     </footer>
-
+    <script>
+        window.TruthBotConfig = {
+            apis: {
+                googleFactCheck: {
+                    enabled: true,
+                    apiKey: 'AIzaSyBt1a6mcCXCHAoPV6K6cW5Ogc4oT_Hy2yM'
+                }
+            }
+        };
+    </script>
+    <script src="truthbot/truthbot.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
